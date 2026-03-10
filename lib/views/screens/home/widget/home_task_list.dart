@@ -1,12 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task3/controller/task_controller.dart';
 import 'package:task3/models/task_model.dart';
 import 'package:task3/views/widgets/stats_header.dart';
 import 'package:task3/views/widgets/task_card.dart';
-
-
 
 class HomeTaskList extends StatelessWidget {
   final void Function(String taskId) onToggle;
@@ -26,9 +23,7 @@ class HomeTaskList extends StatelessWidget {
       builder: (_, tasks, __) {
         // Loading
         if (tasks.status == TaskLoadStatus.loading) {
-          return const SliverFillRemaining(
-            child: AppLoadingIndicator(),
-          );
+          return const SliverFillRemaining(child: AppLoadingIndicator());
         }
 
         // Error

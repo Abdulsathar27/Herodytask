@@ -1,39 +1,31 @@
-// lib/config/app_theme.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  // Primary palette - clean indigo
   static const Color primary = Color(0xFF4F46E5);
   static const Color primaryLight = Color(0xFF818CF8);
   static const Color primaryDark = Color(0xFF3730A3);
 
-  // Surface colors
   static const Color background = Color(0xFFF8F9FF);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceVariant = Color(0xFFF1F2FF);
 
-  // Text
   static const Color textPrimary = Color(0xFF1E1B4B);
   static const Color textSecondary = Color(0xFF6B7280);
   static const Color textHint = Color(0xFFADB5BD);
 
-  // Feedback
   static const Color success = Color(0xFF10B981);
   static const Color error = Color(0xFFEF4444);
   static const Color warning = Color(0xFFF59E0B);
 
-  // Task priority colors
   static const Color priorityHigh = Color(0xFFEF4444);
   static const Color priorityMedium = Color(0xFFF59E0B);
   static const Color priorityLow = Color(0xFF10B981);
 
-  // Neutral
   static const Color border = Color(0xFFE5E7EB);
   static const Color divider = Color(0xFFF3F4F6);
   static const Color shadow = Color(0x0F000000);
 
-  // Dark theme
   static const Color darkBackground = Color(0xFF0F0E1A);
   static const Color darkSurface = Color(0xFF1A1929);
   static const Color darkSurfaceVariant = Color(0xFF252438);
@@ -111,7 +103,10 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surfaceVariant,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -128,10 +123,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.error),
         ),
-        hintStyle: GoogleFonts.inter(
-          color: AppColors.textHint,
-          fontSize: 14,
-        ),
+        hintStyle: GoogleFonts.inter(color: AppColors.textHint, fontSize: 14),
         labelStyle: GoogleFonts.inter(
           color: AppColors.textSecondary,
           fontSize: 14,
@@ -221,7 +213,10 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.darkSurfaceVariant,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -232,7 +227,10 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.primaryLight, width: 1.5),
+          borderSide: const BorderSide(
+            color: AppColors.primaryLight,
+            width: 1.5,
+          ),
         ),
       ),
     );
@@ -245,7 +243,6 @@ class AppConstants {
   static const double cardRadius = 16.0;
   static const double buttonRadius = 12.0;
 
-  
   static const String firebaseDbUrl =
       'https://task3-161ae-default-rtdb.asia-southeast1.firebasedatabase.app';
 }

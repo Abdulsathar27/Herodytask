@@ -15,16 +15,16 @@ class AppLogo extends StatelessWidget {
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Icon(Icons.check_rounded,
-              color: Colors.white, size: 24),
+          child: const Icon(Icons.check_rounded, color: Colors.white, size: 24),
         ),
         const SizedBox(width: 10),
         const Text(
           AppConstants.appName,
           style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
-              color: AppColors.primary),
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: AppColors.primary,
+          ),
         ),
       ],
     );

@@ -1,24 +1,17 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../models/user_model.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-// final GoogleSignIn _googleSignIn = GoogleSignIn.standard();
 
-  // Stream of auth state changes
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
-  // Get current user
   User? get currentUser => _auth.currentUser;
 
-  // Get ID token for REST API calls
   Future<String?> getIdToken() async {
     return await _auth.currentUser?.getIdToken();
   }
 
-  // Sign up with email & password
   Future<UserModel> signUpWithEmail({
     required String email,
     required String password,
@@ -49,7 +42,6 @@ class AuthService {
     }
   }
 
-  // Sign in with email & password
   Future<UserModel> signInWithEmail({
     required String email,
     required String password,
@@ -74,44 +66,6 @@ class AuthService {
     }
   }
 
-  // Google Sign In
-  // Future<UserModel> signInWithGoogle() async {
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-  //     if (googleUser == null) throw Exception('Google sign in cancelled');
-
-  //     final GoogleSignInAuthentication googleAuth =
-  //         await googleUser.authentication;
-
-  //     final credential = GoogleAuthProvider.credential(
-  //       accessToken: googleAuth.accessToken,
-  //       idToken: googleAuth.idToken,
-  //     );
-
-  //     final userCredential = await _auth.signInWithCredential(credential);
-  //     final token = await userCredential.user?.getIdToken();
-
-  //     return UserModel(
-  //       uid: userCredential.user!.uid,
-  //       email: userCredential.user!.email!,
-  //       displayName: userCredential.user?.displayName,
-  //       photoUrl: userCredential.user?.photoURL,
-  //       idToken: token,
-  //     );
-  //   } on FirebaseAuthException catch (e) {
-  //     throw _handleAuthError(e);
-  //   }
-  // }
-
-  // Sign out
-  // Future<void> signOut() async {
-  //   await Future.wait([
-  //     _auth.signOut(),
-  //     _googleSignIn.signOut(),
-  //   ]);
-  // }
-
-  // Reset password
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -120,7 +74,6 @@ class AuthService {
     }
   }
 
-  // Map Firebase errors to readable messages
   String _handleAuthError(FirebaseAuthException e) {
     switch (e.code) {
       case 'email-already-in-use':

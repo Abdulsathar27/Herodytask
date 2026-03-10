@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:task3/controller/task_controller.dart';
 import 'package:task3/views/widgets/app_text_field.dart';
 
-
-
 class HomeSearchBar extends StatefulWidget {
   const HomeSearchBar({super.key});
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user_model.dart';
@@ -7,7 +6,6 @@ enum AuthStatus { initial, authenticated, unauthenticated, loading }
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  // final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   AuthStatus _status = AuthStatus.initial;
   UserModel? _user;
@@ -41,7 +39,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Returns a fresh ID token. Call this before every REST API request.
   Future<String?> getValidToken() async {
     try {
       final token = await _auth.currentUser?.getIdToken(true);
@@ -60,7 +57,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Sign Up ──────────────────────────────────────────────────────────────
   Future<bool> signUp({
     required String email,
     required String password,
@@ -83,15 +79,10 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Sign In ──────────────────────────────────────────────────────────────
-  Future<bool> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> signIn({required String email, required String password}) async {
     _setLoading();
     try {
-      await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (e) {
       _setError(_mapError(e.code));
@@ -99,37 +90,10 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Google Sign In ───────────────────────────────────────────────────────
-  // Future<bool> signInWithGoogle() async {
-  //   _setLoading();
-  //   try {
-  //     final googleUser = await _googleSignIn.signIn();
-  //     if (googleUser == null) {
-  //       _setError('Google sign in was cancelled');
-  //       return false;
-  //     }
-  //     final googleAuth = await googleUser.authentication;
-  //     final credential = GoogleAuthProvider.credential(
-  //       accessToken: googleAuth.accessToken,
-  //       idToken: googleAuth.idToken,
-  //     );
-  //     await _auth.signInWithCredential(credential);
-  //     return true;
-  //   } on FirebaseAuthException catch (e) {
-  //     _setError(_mapError(e.code));
-  //     return false;
-  //   }
-  // }
-
-  // ─── Sign Out ─────────────────────────────────────────────────────────────
   Future<void> signOut() async {
-    await Future.wait([
-      _auth.signOut(),
-      
-    ]);
+    await Future.wait([_auth.signOut()]);
   }
 
-  // ─── Password Reset ───────────────────────────────────────────────────────
   Future<bool> sendPasswordReset(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -145,7 +109,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Helpers ──────────────────────────────────────────────────────────────
   void _setLoading() {
     _status = AuthStatus.loading;
     _errorMessage = null;

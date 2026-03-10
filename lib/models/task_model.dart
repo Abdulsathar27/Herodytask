@@ -1,5 +1,3 @@
-// lib/models/task_model.dart
-
 enum TaskPriority { high, medium, low }
 
 enum TaskCategory { work, personal, shopping, health, other }
@@ -64,7 +62,6 @@ class TaskModel {
     };
   }
 
-  // FIX: Use a sentinel to allow clearing dueDate back to null
   TaskModel copyWith({
     String? title,
     String? description,

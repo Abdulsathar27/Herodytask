@@ -4,8 +4,6 @@ import 'package:task3/config/app_theme.dart';
 import 'package:task3/controller/auth_controller.dart';
 import 'package:task3/views/screens/profile/profile_screen.dart';
 
-
-
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
@@ -22,10 +20,7 @@ class HomeAppBar extends StatelessWidget {
           children: [
             Text(
               'Hello, $name 👋',
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-              ),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ),
             const Text(
               "Let's get things done",
@@ -45,10 +40,7 @@ class HomeAppBar extends StatelessWidget {
             MaterialPageRoute(builder: (_) => const ProfileScreen()),
           ),
           child: Selector<AuthProvider, (String?, String?)>(
-            selector: (_, auth) => (
-              auth.user?.photoUrl,
-              auth.user?.firstName,
-            ),
+            selector: (_, auth) => (auth.user?.photoUrl, auth.user?.firstName),
             builder: (_, data, __) => Container(
               margin: const EdgeInsets.only(right: 16),
               width: 38,

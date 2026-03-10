@@ -10,7 +10,7 @@ class StatCard extends StatelessWidget {
     required this.value,
     required this.label,
     this.color = AppColors.primary,
-    super.key
+    super.key,
   });
 
   @override
@@ -37,7 +37,9 @@ class StatCard extends StatelessWidget {
             Text(
               label,
               style: const TextStyle(
-                  fontSize: 12, color: AppColors.textSecondary),
+                fontSize: 12,
+                color: AppColors.textSecondary,
+              ),
             ),
           ],
         ),

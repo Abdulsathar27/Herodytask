@@ -13,9 +13,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: _LoginForm()),
-    );
+    return const Scaffold(body: SafeArea(child: _LoginForm()));
   }
 }
 
@@ -50,15 +48,15 @@ class _LoginFormState extends State<_LoginForm> {
     }
   }
 
-
   void _showError(String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(msg),
-      backgroundColor: AppColors.error,
-      behavior: SnackBarBehavior.floating,
-      shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    ));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: AppColors.error,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
   }
 
   @override
@@ -75,14 +73,12 @@ class _LoginFormState extends State<_LoginForm> {
             const SizedBox(height: 40),
             const Text(
               'Welcome back',
-              style: TextStyle(
-                  fontSize: 28, fontWeight: FontWeight.w700),
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 6),
             const Text(
               'Sign in to your account to continue',
-              style: TextStyle(
-                  color: AppColors.textSecondary, fontSize: 15),
+              style: TextStyle(color: AppColors.textSecondary, fontSize: 15),
             ),
             const SizedBox(height: 32),
             AppTextField(
@@ -91,8 +87,7 @@ class _LoginFormState extends State<_LoginForm> {
               hint: 'you@example.com',
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
-              prefixIcon:
-                  const Icon(Icons.email_outlined, size: 18),
+              prefixIcon: const Icon(Icons.email_outlined, size: 18),
               validator: (v) {
                 if (v == null || v.isEmpty) return 'Email is required';
                 if (!v.contains('@')) return 'Enter a valid email';
@@ -114,7 +109,8 @@ class _LoginFormState extends State<_LoginForm> {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => const ForgotPasswordScreen()),
+                    builder: (_) => const ForgotPasswordScreen(),
+                  ),
                 ),
                 child: const Text('Forgot password?'),
               ),
@@ -141,14 +137,14 @@ class _LoginFormState extends State<_LoginForm> {
                 GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (_) => const RegisterScreen()),
+                    MaterialPageRoute(builder: (_) => const RegisterScreen()),
                   ),
                   child: const Text(
                     'Sign up',
                     style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w600),
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],
@@ -159,7 +155,3 @@ class _LoginFormState extends State<_LoginForm> {
     );
   }
 }
-
-
-
-

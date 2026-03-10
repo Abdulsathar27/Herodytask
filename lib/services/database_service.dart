@@ -1,4 +1,3 @@
-// lib/services/database_service.dart
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/task_model.dart';
@@ -13,7 +12,6 @@ class DatabaseService {
   String _taskUrl(String userId, String taskId, String token) =>
       '$_base/users/$userId/tasks/$taskId.json?auth=$token';
 
-  // ─── Fetch all tasks ─────────────────────────────────────────────────────
   Future<List<TaskModel>> fetchTasks(String userId, String token) async {
     final res = await http.get(Uri.parse(_tasksUrl(userId, token)));
 
@@ -33,9 +31,11 @@ class DatabaseService {
     return list;
   }
 
-  // ─── Add task — returns the Firebase-generated ID ─────────────────────────
   Future<String> addTaskGetId(
-      String userId, String token, TaskModel task) async {
+    String userId,
+    String token,
+    TaskModel task,
+  ) async {
     final res = await http.post(
       Uri.parse(_tasksUrl(userId, token)),
       headers: {'Content-Type': 'application/json'},
@@ -50,7 +50,6 @@ class DatabaseService {
     return data['name'] as String;
   }
 
-  // ─── Update a task (PATCH merges fields) ─────────────────────────────────
   Future<void> updateTask(String userId, String token, TaskModel task) async {
     final res = await http.patch(
       Uri.parse(_taskUrl(userId, task.id, token)),
@@ -63,9 +62,12 @@ class DatabaseService {
     }
   }
 
-  // ─── Toggle completion only ───────────────────────────────────────────────
   Future<void> toggleTaskCompletion(
-      String userId, String token, String taskId, bool isCompleted) async {
+    String userId,
+    String token,
+    String taskId,
+    bool isCompleted,
+  ) async {
     final res = await http.patch(
       Uri.parse(_taskUrl(userId, taskId, token)),
       headers: {'Content-Type': 'application/json'},
@@ -77,14 +79,9 @@ class DatabaseService {
     }
   }
 
-  // ─── Delete a task ────────────────────────────────────────────────────────
-  Future<void> deleteTask(
-      String userId, String token, String taskId) async {
-    final res = await http.delete(
-      Uri.parse(_taskUrl(userId, taskId, token)),
-    );
+  Future<void> deleteTask(String userId, String token, String taskId) async {
+    final res = await http.delete(Uri.parse(_taskUrl(userId, taskId, token)));
 
-    // Firebase DELETE returns 200 with null body on success
     if (res.statusCode != 200) {
       throw Exception('Failed to delete task (${res.statusCode})');
     }

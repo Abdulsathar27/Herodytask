@@ -42,11 +42,8 @@ class _ProfileBody extends StatelessWidget {
         children: [
           // Avatar
           Selector<AuthProvider, (String?, String?, String?)>(
-            selector: (_, auth) => (
-              auth.user?.firstName,
-              auth.user?.email,
-              auth.user?.photoUrl,
-            ),
+            selector: (_, auth) =>
+                (auth.user?.firstName, auth.user?.email, auth.user?.photoUrl),
             builder: (_, data, __) => AvatarSection(
               name: data.$1 ?? 'User',
               email: data.$2 ?? '',
@@ -57,23 +54,16 @@ class _ProfileBody extends StatelessWidget {
 
           // Stats row
           Selector<TaskProvider, (int, int, int)>(
-            selector: (_, tasks) => (
-              tasks.totalCount,
-              tasks.completedCount,
-              tasks.activeCount,
-            ),
-            builder: (_, data, __) => StatsRow(
-              total: data.$1,
-              completed: data.$2,
-              active: data.$3,
-            ),
+            selector: (_, tasks) =>
+                (tasks.totalCount, tasks.completedCount, tasks.activeCount),
+            builder: (_, data, __) =>
+                StatsRow(total: data.$1, completed: data.$2, active: data.$3),
           ),
           const SizedBox(height: 24),
 
           // Info tiles
           Selector<AuthProvider, (String?, String?)>(
-            selector: (_, auth) =>
-                (auth.user?.displayName, auth.user?.email),
+            selector: (_, auth) => (auth.user?.displayName, auth.user?.email),
             builder: (_, data, __) => Column(
               children: [
                 ProfileTile(
@@ -102,9 +92,3 @@ class _ProfileBody extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-

@@ -1,14 +1,6 @@
-// lib/providers/task_provider.dart
 import '../models/task_model.dart';
 import '../services/database_service.dart';
 import 'package:flutter/foundation.dart';
-
-// ─── Golden Rule ──────────────────────────────────────────────────────────────
-// Provider ONLY holds state + talks to the Service layer.
-// It NEVER imports: BuildContext, SnackBar, Navigator,
-//                   TaskBottomSheet, AuthProvider, or any widget.
-// The UI (screens/widgets) calls provider methods and shows SnackBars itself.
-// ─────────────────────────────────────────────────────────────────────────────
 
 enum TaskLoadStatus { initial, loading, loaded, error }
 
@@ -24,7 +16,6 @@ class TaskProvider extends ChangeNotifier {
   TaskCategory? _categoryFilter;
   String _searchQuery = '';
 
-  // ─── Getters ──────────────────────────────────────────────────────────────
   TaskLoadStatus get status => _status;
   String? get errorMessage => _errorMessage;
   TaskFilter get filter => _filter;
@@ -37,16 +28,17 @@ class TaskProvider extends ChangeNotifier {
   double get completionRate =>
       _tasks.isEmpty ? 0.0 : completedCount / _tasks.length;
 
-  // Filtered + searched list for the UI
   List<TaskModel> get tasks {
     List<TaskModel> result = List.from(_tasks);
 
     if (_searchQuery.isNotEmpty) {
       final q = _searchQuery.toLowerCase();
       result = result
-          .where((t) =>
-              t.title.toLowerCase().contains(q) ||
-              t.description.toLowerCase().contains(q))
+          .where(
+            (t) =>
+                t.title.toLowerCase().contains(q) ||
+                t.description.toLowerCase().contains(q),
+          )
           .toList();
     }
 
@@ -68,7 +60,6 @@ class TaskProvider extends ChangeNotifier {
     return result;
   }
 
-  // ─── Fetch ────────────────────────────────────────────────────────────────
   Future<void> fetchTasks(String userId, String token) async {
     _status = TaskLoadStatus.loading;
     _errorMessage = null;
@@ -83,7 +74,6 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Add ──────────────────────────────────────────────────────────────────
   Future<bool> addTask({
     required String userId,
     required String token,
@@ -127,7 +117,6 @@ class TaskProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Update ───────────────────────────────────────────────────────────────
   Future<bool> updateTask({
     required String userId,
     required String token,
@@ -148,7 +137,6 @@ class TaskProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Toggle (optimistic) ──────────────────────────────────────────────────
   Future<void> toggleTask(String userId, String token, String taskId) async {
     final i = _tasks.indexWhere((t) => t.id == taskId);
     if (i == -1) return;
@@ -163,7 +151,6 @@ class TaskProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Delete (optimistic) ──────────────────────────────────────────────────
   Future<bool> deleteTask(String userId, String token, String taskId) async {
     final i = _tasks.indexWhere((t) => t.id == taskId);
     if (i == -1) return false;
@@ -174,13 +161,12 @@ class TaskProvider extends ChangeNotifier {
       await _db.deleteTask(userId, token, taskId);
       return true;
     } catch (_) {
-      _tasks.insert(i, removed); // revert on failure
+      _tasks.insert(i, removed);
       notifyListeners();
       return false;
     }
   }
 
-  // ─── Filters ──────────────────────────────────────────────────────────────
   void setFilter(TaskFilter filter) {
     _filter = filter;
     notifyListeners();
@@ -196,7 +182,6 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Clear on sign-out ────────────────────────────────────────────────────
   void clearTasks() {
     _tasks = [];
     _status = TaskLoadStatus.initial;

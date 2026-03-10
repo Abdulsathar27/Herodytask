@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task3/controller/task_controller.dart';
 import 'package:task3/views/widgets/stats_header.dart';
-
-
 
 class HomeFilterBar extends StatelessWidget {
   const HomeFilterBar({super.key});

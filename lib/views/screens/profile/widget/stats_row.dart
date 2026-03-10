@@ -11,7 +11,7 @@ class StatsRow extends StatelessWidget {
     required this.total,
     required this.completed,
     required this.active,
-    super.key
+    super.key,
   });
 
   @override
@@ -20,15 +20,9 @@ class StatsRow extends StatelessWidget {
       children: [
         StatCard(value: '$total', label: 'Total'),
         const SizedBox(width: 12),
-        StatCard(
-            value: '$completed',
-            label: 'Done',
-            color: AppColors.success),
+        StatCard(value: '$completed', label: 'Done', color: AppColors.success),
         const SizedBox(width: 12),
-        StatCard(
-            value: '$active',
-            label: 'Active',
-            color: AppColors.warning),
+        StatCard(value: '$active', label: 'Active', color: AppColors.warning),
       ],
     );
   }

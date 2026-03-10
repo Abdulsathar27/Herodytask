@@ -10,7 +10,7 @@ class AvatarSection extends StatelessWidget {
     required this.name,
     required this.email,
     this.photoUrl,
-    super.key
+    super.key,
   });
 
   @override
@@ -46,14 +46,12 @@ class AvatarSection extends StatelessWidget {
         const SizedBox(height: 12),
         Text(
           name,
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w700),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 4),
         Text(
           email,
-          style: const TextStyle(
-              fontSize: 14, color: AppColors.textSecondary),
+          style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
         ),
       ],
     );

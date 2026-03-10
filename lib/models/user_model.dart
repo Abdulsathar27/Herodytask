@@ -1,5 +1,3 @@
-// lib/models/user_model.dart
-
 class UserModel {
   final String uid;
   final String email;
@@ -15,7 +13,6 @@ class UserModel {
     this.idToken,
   });
 
-  /// Returns first name from displayName, or the email prefix as fallback
   String get firstName {
     if (displayName != null && displayName!.isNotEmpty) {
       return displayName!.split(' ').first;

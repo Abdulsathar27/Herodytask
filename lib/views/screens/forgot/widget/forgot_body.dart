@@ -24,13 +24,12 @@ class _ForgotBodyState extends State<ForgotBody> {
     super.dispose();
   }
 
-
   Future<void> _onSend() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final success = await context
-        .read<AuthProvider>()
-        .sendPasswordReset(_emailCtrl.text.trim());
+    final success = await context.read<AuthProvider>().sendPasswordReset(
+      _emailCtrl.text.trim(),
+    );
 
     if (success && mounted) {
       setState(() => _sent = true);
@@ -62,8 +61,11 @@ class _ForgotBodyState extends State<ForgotBody> {
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.lock_reset_rounded,
-                      color: AppColors.primary, size: 28),
+                  Icon(
+                    Icons.lock_reset_rounded,
+                    color: AppColors.primary,
+                    size: 28,
+                  ),
                   SizedBox(width: 12),
                   Expanded(
                     child: Text(

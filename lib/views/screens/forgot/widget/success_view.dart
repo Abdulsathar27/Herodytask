@@ -6,11 +6,7 @@ class SuccessView extends StatelessWidget {
   final String email;
   final VoidCallback onBack;
 
-  const SuccessView({
-    required this.email,
-    required this.onBack,
-    super.key
-  });
+  const SuccessView({required this.email, required this.onBack, super.key});
 
   @override
   Widget build(BuildContext context) {

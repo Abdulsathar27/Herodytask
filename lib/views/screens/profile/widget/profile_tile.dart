@@ -10,7 +10,7 @@ class ProfileTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.value,
-    super.key
+    super.key,
   });
 
   @override
@@ -33,14 +33,17 @@ class ProfileTile extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.textSecondary),
+                  fontSize: 12,
+                  color: AppColors.textSecondary,
+                ),
               ),
               const SizedBox(height: 2),
               Text(
                 value,
                 style: const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.w500),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),

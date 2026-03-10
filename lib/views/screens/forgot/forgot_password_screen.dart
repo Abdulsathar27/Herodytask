@@ -1,10 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:task3/views/screens/forgot/widget/forgot_body.dart';
-
-
-
-
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
@@ -23,10 +18,3 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
